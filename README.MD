@@ -1,6 +1,9 @@
 ## Please readme :)
 
-Before you run this project
+This is a API for library
+So is API used for collect a book
+
+But, Before you run this project
 there are things that must be done
 
 ## First 
