@@ -5,6 +5,8 @@ there are things that must be done
 
 ## First 
 Open terminal and run this command    [   npm install   ]
+\n
+Because you have to install node_modules and package-lock.json
 
 ## Author
 Muhammad Ashari Abdillah
