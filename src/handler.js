@@ -1,4 +1,5 @@
 const { nanoid } = require("nanoid");
+const fs = require("fs");
 const books = require("./bookshelf");
 
 const addBooksHandler = (request, h) => {
@@ -309,10 +310,37 @@ const deleteBookByIdHandler = (request, h) => {
   return response;
 };
 
+const uploadImageHandler = (request, h) => {
+  const payload = request.payload;
+  const { image: { hapi: { filename }, }, } = payload;
+
+  if (filename === "") {
+    const response = h.response({
+      status: "fail",
+      message: "Gagal mengunggah gambar, Mohon isi gambar",
+    });
+    response.code(400);
+    return response;
+  }
+
+  const path = `${__dirname}/assets/img/${filename}`;
+  const img = fs.createWriteStream(path);
+  const image = payload.image.pipe(img)["path"];
+
+  const response = h.response({
+    status: "success",
+    message: "Image berhasil diupload",
+    image,
+  });
+  response.code(201);
+  return response;
+};
+
 module.exports = {
   addBooksHandler,
   getAllBooksHandler,
   getBookByIdHandler,
   editBookByIdHandler,
   deleteBookByIdHandler,
+  uploadImageHandler,
 };
