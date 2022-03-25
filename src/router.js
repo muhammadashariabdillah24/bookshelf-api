@@ -2,9 +2,8 @@ const {
   addBooksHandler,
   getAllBooksHandler,
   getBookByIdHandler,
-  editBookByIdHandler,
+  updateBookByIdHandler,
   deleteBookByIdHandler,
-  uploadImageHandler,
 } = require("./handler");
 
 const router = [
@@ -26,25 +25,12 @@ const router = [
   {
     method: "PUT",
     path: "/books/{bookId}",
-    handler: editBookByIdHandler,
+    handler: updateBookByIdHandler,
   },
   {
     method: "DELETE",
     path: "/books/{bookId}",
     handler: deleteBookByIdHandler,
-  },
-  {
-    method: "POST",
-    path: "/uploads",
-    config: {
-      payload: {
-        output: "stream",
-        parse: true,
-        multipart: true,
-        maxBytes: 3 * 1024 * 1024,
-      },
-    },
-    handler: uploadImageHandler,
   },
 ];
 
